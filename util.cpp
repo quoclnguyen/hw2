@@ -15,20 +15,19 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
+  //adds letter to a temp string until it encounters a non-letter.
+  //adds word to the set of keywords if it has 3 or more characters.
   std::set<std::string> keywords;
-  rawWords = trim(rawWords)
+  rawWords = trim(rawWords);
+  rawWords = convToLower(rawWords);
   int start =0;
   std::string temp = "";
   bool found_word = false;
-  while (start !=NULL){
-      if((60<=rawWords[start] <= 90) || (97<=rawWords[start]<=122)){
+  bool found_end = false;
+  while (!found_end){
+      if(rawWords[start]>=97 && rawWords[start]<=122){
           found_word = true;
-          if (rawWords[start] <=90){ //make all characters lowecase
-              temp += (char)(rawWords[start]+32);
-          }
-          else{
-              temp+= rawWords[start];
-          }
+          temp+= rawWords[start];
           start++;
       }
       else{ // if char not a letter
@@ -38,10 +37,14 @@ std::set<std::string> parseStringToWords(string rawWords)
               }
               else{
                   keywords.insert(temp);
+                  temp = "";
               }
           }
           found_word=false;
-          start++
+          if (rawWords[start] == '\0'){
+            found_end = true;
+          }
+          start++;
       }
   }
   return keywords;

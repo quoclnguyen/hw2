@@ -12,10 +12,15 @@ Movie::~Movie()
 }
 std::set<std::string> Movie::keywords() const {
   std::set<std::string> a = parseStringToWords(name_);
+  a.insert(genre_);
+  a.insert(rating_);
   return a; 
 }
 std::string Movie::displayString() const{
-  return ""; //for now
+  std::string priceCorrected = std::to_string(price_);
+  priceCorrected = priceCorrected.substr(0, (priceCorrected.size() -4));
+  std::string displayed = name_ + '\n' + "Genre: " + genre_ + " Rating: " + rating_ + '\n' + priceCorrected + ' ' + std::to_string(qty_) + " left.";
+  return displayed; 
 
 }
 void Movie::dump(std::ostream& os) const

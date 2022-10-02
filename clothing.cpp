@@ -12,11 +12,16 @@ Clothing::~Clothing()
 }
 std::set<std::string> Clothing::keywords() const {
   std::set<std::string> a = parseStringToWords(name_);
+  std::set<std::string> brandName = parseStringToWords(brand_);
+  a.insert(brandName.begin(), brandName.end());
+  a.insert(size_);
   return a; 
 }
 std::string Clothing::displayString() const{
-  return ""; //for now
-
+  std::string priceCorrected = std::to_string(price_);
+  priceCorrected = priceCorrected.substr(0, (priceCorrected.size() -4));
+  std::string displayed = name_ + '\n' + "Size: " + size_ + " Brand: " + brand_ + '\n' + priceCorrected + ' ' + std::to_string(qty_) + " left.";
+  return displayed; 
 }
 void Clothing::dump(std::ostream& os) const
 {

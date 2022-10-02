@@ -12,10 +12,16 @@ Book::~Book()
 }
 std::set<std::string> Book::keywords() const {
   std::set<std::string> a = parseStringToWords(name_);
+  std::set<std::string> authorName = parseStringToWords(author_);
+  a.insert(isbn_);
+  a.insert(authorName.begin(), authorName.end());
   return a; 
 }
 std::string Book::displayString() const{
-  return ""; //for now
+  std::string priceCorrected = std::to_string(price_);
+  priceCorrected = priceCorrected.substr(0, (priceCorrected.size() -4));
+  std::string displayed = name_ + '\n' + "Author: " + author_ + " ISBN: " + isbn_ + '\n' + priceCorrected + ' ' + std::to_string(qty_) + " left.";
+  return displayed; 
 
 }
 void Book::dump(std::ostream& os) const

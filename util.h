@@ -38,6 +38,7 @@ std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
     unionSet.insert(*it2);
     it2++;
   }
+  return unionSet;
 }
 
 /***********************************************/

@@ -1,0 +1,13 @@
+.clang-format
+.clang-tidy
+book.o
+clothing.o
+movie.o
+product_parser.o
+amazon
+amazon.o
+db_parser.o
+mydatastore.o
+product.o
+user.o
+util.o
