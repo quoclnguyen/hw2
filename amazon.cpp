@@ -104,8 +104,8 @@ int main(int argc, char* argv[])
                 string user;
                 int productIndex;
                 if (ss>> user >>productIndex){
-                  if (productIndex < (int)hits.size()){
-                    ds.addToCart(user, hits[productIndex]);
+                  if (productIndex < (int)hits.size()+1){
+                    ds.addToCart(user, hits[productIndex-1]);
                   }
                   else { cout << "Invalid Index!"<< endl;}
                 }

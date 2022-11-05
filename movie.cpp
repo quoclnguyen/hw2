@@ -12,8 +12,8 @@ Movie::~Movie()
 }
 std::set<std::string> Movie::keywords() const {
   std::set<std::string> a = parseStringToWords(name_);
-  a.insert(genre_);
-  a.insert(rating_);
+  a.insert(convToLower(genre_));
+  a.insert(convToLower(rating_));
   return a; 
 }
 std::string Movie::displayString() const{

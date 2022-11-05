@@ -84,7 +84,7 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
   return final;
 }
 void MyDataStore::dump(std::ostream& ofile){
-  ofile << "Products:\n";
+  ofile << "<products>\n";
   typename std::set<Product*>::iterator it = products.begin();
   while (it != products.end()){
     Product* temp1 = *it;
@@ -92,7 +92,8 @@ void MyDataStore::dump(std::ostream& ofile){
     ++it;
     delete temp1;
   }
-  ofile << "Users:\n";
+  ofile<< "</products>\n";
+  ofile << "<users>\n";
   typename std::map<User*, std::deque<Product*>>::iterator it2 = users.begin();
   while (it2 != users.end()){
     User* temp2 = (*it2).first;
@@ -103,6 +104,7 @@ void MyDataStore::dump(std::ostream& ofile){
     delete temp2;
 
   }
+  ofile << "</users>\n";
   //users.clear();
   //usernames.clear();
   //products.clear();
@@ -114,7 +116,7 @@ void MyDataStore::addToCart (std::string user, Product* p){
     users[usernames[user]].push_back(p);
   }
   else{
-    std::cout << "Invalid Request" << std::endl;
+    std::cout << "Invalid request" << std::endl;
   }
 
 }
@@ -126,14 +128,14 @@ void MyDataStore::viewCart(std::string user){
     int index = 1;
     while(it != users[u].end()){ // iterate thru 
       currentItem = (*it)->displayString();
-      std::cout<<index<<". "<<currentItem <<std::endl;
+      std::cout<<"Item " <<index << std::endl <<currentItem <<std::endl;
       ++index;
       ++it;
     }
     //delete u;
   }
   else{
-    std::cout <<"Invalid Request " << std::endl;
+    std::cout <<"Invalid username" << std::endl;
   }
 
 }
@@ -155,6 +157,9 @@ void MyDataStore::buyCart(std::string user){
     }
     //users[u] = remaining;
   }
-  else{ std::cout << "Invalid username. " << std::endl;}
+  else{ 
+    std::cout << "Invalid username" << std::endl;
+    return;
+    }
   users[usernames[user]] = remaining; // update cart with remaining items
 }
